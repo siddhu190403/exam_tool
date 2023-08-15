@@ -1,1 +1,7 @@
-<h1>Displays</h1>
+{% extends 'basepage.html' %}
+
+{% block history %}
+    {% for his in hist %}
+        <p>{{his}}</p>
+    {% endfor %}
+{% endblock %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import Testing,sample
+from .models import Testing,sample,History
 import requests
 from bs4 import BeautifulSoup
 from django.contrib.auth.models import User,auth
@@ -47,8 +47,14 @@ def practicePage(request):
 def result(request):
     req = request.POST["search"]
     url = 'https://en.wikipedia.org/wiki/'+req
-    r = requests.get(url)
+
+    #add record in history
+    name = User.objects.values_list('username').get(id = request.user.id)
+    hist = History(uid=request.user.id,name=name,history=req)
+    hist.save()
     # Parsing the HTML
+
+    r = requests.get(url)
     soup = BeautifulSoup(r.content, 'html.parser')
     res=""
     for para in soup.find_all("p"):
@@ -74,3 +80,12 @@ def register(request):
 def Logout(request):
     auth.logout(request)
     return redirect('/login')
+
+def ViewHistory(request):
+    history = []
+    histories = History.objects.all()
+    for his in histories:
+        if his.uid == request.user.id:
+            history.append(his.history)
+    print(history)
+    return render(request,'history.html',{'hist':history})

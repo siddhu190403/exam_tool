@@ -11,3 +11,8 @@ class Testing:
 class sample(models.Model):
     name = models.CharField(max_length=200)
     age = models.IntegerField()
+
+class History(models.Model):
+    name = models.CharField(max_length=200)
+    history = models.CharField(max_length=30)
+    uid = models.IntegerField()

@@ -9,6 +9,7 @@ urlpatterns = [
     path('practice/',views.practicePage,name='practice page for testing'),
     path('search/result/',views.result,name='result'),
     path('sign-up/register',views.register,name='register new user'),
-    path('search/logout/',views.Logout,name='logout')
-
+    path('search/logout/',views.Logout,name='logout'),
+    path('logout/',views.Logout,name='logout'),
+    path('search/result/history',views.ViewHistory,name='History')
  ]

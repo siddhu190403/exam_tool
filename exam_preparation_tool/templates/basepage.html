@@ -7,9 +7,22 @@
 </head>
 <body>
     <nav>
-        <a href="#">Home</a>
-        <a href="search">Search</a>
+        <a href="/">Home</a>
+        {% if user.is_authenticated %}
+            <a href="logout">Logout</a>
+            <a href="search">Search</a>
+        {% else %}
+           <a href="login">Login</a>
+        {% endif %}
     </nav>
+    {%block history %}
+
+    {% endblock %}
+
+    {%block outer %}
+    
+    {% endblock %}
+    
     {% block content %}
 
     {% endblock %}
