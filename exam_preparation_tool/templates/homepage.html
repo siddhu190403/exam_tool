@@ -4,6 +4,7 @@
 <h1>This is home page</h1>
 {% if user.is_authenticated %}
     <h3>Hello {{user.first_name}}</h3>
-{% endif %}
+{% else %}
 <a href="sign-up">New to this site</a>
+{% endif %}
 {% endblock %}

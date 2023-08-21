@@ -1,12 +1,11 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from .models import Testing,sample,History
 import requests
 from bs4 import BeautifulSoup
 from django.contrib.auth.models import User,auth
 from django.contrib.auth import logout
 from django.contrib import messages
-
 
 # Create your views here.
 def helloDjango(request):
@@ -37,12 +36,6 @@ def LoginPage(request):
 
 def SignupPage(request):
     return render(request,'register.html')
-
-def practicePage(request):
-    test = Testing()
-    test.price = 500
-    test.desc = 'Just to check dynamic rendering'
-    return render(request,'practice.html',{'price':test.price,'desc':test.desc})
 
 def result(request):
     req = request.POST["search"]
