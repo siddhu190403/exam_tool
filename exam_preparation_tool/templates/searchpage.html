@@ -1,4 +1,7 @@
 {% extends 'basepage.html' %}
+
+{% block outer %}
+
 <script>
     function reload(){
         console.log(window.location.href == 'http://127.0.0.1:8000/search/result/');
@@ -11,12 +14,11 @@
         document.getElementById('search').focus();
     }
 </script>
-{% block outer %}
 <body onload="focus()">
-    <h3>Hi how can I help you {{user.first_name}}</h3>
+    <h3 class="test">Hi how can I help you {{user.first_name}}</h3>
     <form method="post" action="result/" >
         {% csrf_token %}
-        <input type="text" id="search" name="search" onclick="reload()"/>
+        <input type="text" id="search" name="search" onclick="reload()" class="input_box"/>
         <input type="submit" value="submit" />
     </form>
     <a href="history">View History</a>

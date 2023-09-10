@@ -6,6 +6,8 @@ from bs4 import BeautifulSoup
 from django.contrib.auth.models import User,auth
 from django.contrib.auth import logout
 from django.contrib import messages
+from django.template import loader
+
 
 # Create your views here.
 def helloDjango(request):

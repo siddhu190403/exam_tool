@@ -1,0 +1,25 @@
+.center {
+    border : 2px solid black;
+    border-radius: 15px;
+    padding : 10px;
+  }
+  td{
+    padding: 20px;
+  }
+  input{
+    border-radius: 20px;
+    padding:4px;
+    margin : 5px;
+  }
+  
+  table{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  input:hover{
+    background-color: rgb(211,211,211);
+    border-color: grey;
+  }
