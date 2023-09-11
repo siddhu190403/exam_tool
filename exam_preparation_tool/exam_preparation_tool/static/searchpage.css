@@ -1,3 +1,6 @@
-.input_box{
-    border: 2px solid black;
+.searchbar{
+    border-radius: 15px;
+}
+.test{
+    color: green;
 }

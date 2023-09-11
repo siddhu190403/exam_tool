@@ -1,7 +1,9 @@
 .center {
     border : 2px solid black;
     border-radius: 15px;
+    border-style:inset;
     padding : 10px;
+    width:500px;
   }
   td{
     padding: 20px;
@@ -10,6 +12,7 @@
     border-radius: 20px;
     padding:4px;
     margin : 5px;
+    width:500px;
   }
   
   table{
@@ -22,4 +25,17 @@
   input:hover{
     background-color: rgb(211,211,211);
     border-color: grey;
+  }
+  
+  img{
+    width: 300px;
+    height:300px;
+  }
+  .test{
+    color: green;
+  }
+
+  #button{
+    border-radius: 15px;
+    margin:15px
   }
