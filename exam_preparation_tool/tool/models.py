@@ -11,6 +11,7 @@ class Testing:
 class sample(models.Model):
     name = models.CharField(max_length=200)
     age = models.IntegerField()
+    sam = models.CharField(max_length=200)
 
 class History(models.Model):
     name = models.CharField(max_length=200)

@@ -1,4 +1,7 @@
 import spacy
+from sumy.parsers.plaintext import PlaintextParser
+from sumy.nlp.tokenizers import Tokenizer
+from sumy.summarizers.lex_rank import LexRankSummarizer
 
 def summarize_text(text, max_sentences):
     # Load the spaCy English model
@@ -23,3 +26,18 @@ def summarize_text(text, max_sentences):
     summary = " ".join(selected_sentences)
 
     return summary
+
+def summarize(input_text, num_sentences=3):
+    # Initialize a LexRank summarizer
+    summarizer = LexRankSummarizer()
+
+    # Parse the input text
+    parser = PlaintextParser.from_string(input_text, Tokenizer("english"))
+
+    # Get the summary with the specified number of sentences
+    summary = summarizer(parser.document, num_sentences)
+
+    # Combine the summary sentences into a single string
+    summary_text = " ".join([str(sentence) for sentence in summary])
+
+    return summary_text

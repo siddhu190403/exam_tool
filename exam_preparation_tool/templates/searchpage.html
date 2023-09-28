@@ -1,29 +1,46 @@
 {% extends 'basepage.html' %}
-
+{% load static %}
 {% block outer %}
-<script>
-    function reload(){
-        console.log(window.location.href == 'http://127.0.0.1:8000/search/result/');
-
-    if(window.location.href == 'http://127.0.0.1:8000/search/result/')
-        location.replace('http://127.0.0.1:8000/search/')
-    }
-
-    function focus(){
-        document.getElementById('search').focus();
-    }
-</script>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Website</title>
+    <script src="{% static './javascript/searchpage.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'searchpage.css' %}">
+</head>
 <body onload="focus()">
     <h3 class="test">Hi how can I help you {{user.first_name}}</h3>
-    <form method="post" action="result/" >
+    <form method="post" action="result/" id="form">
         {% csrf_token %}
-        <input type="text" id="search" name="search" onclick="reload()" class="searchbar"/>
-        <input type="submit" value="submit" />
+        <div>
+            <input type="text" id="search" name="search" onclick="reload()" class="searchbar"/>
+            <button type="submit" class="submit_btn" style="height:30px;width:40px"><i class="fa fa-search"></i></button>
+        </div>
+        <div>
+            {% if not result %}
+                <span>Select marks : </span>
+                <select name="mark" id="mark" placeholder="Enter marks" class="btn btn-primary dropdown-toggle" required>
+                    <option value="select weightage of topic" disabled selected>select weightage of topic</option>
+                    <option value=14>14</option>
+                    <option value=10>10</option>
+                    <option value=2>2</option>
+                    <option value=1>1</option>
+                </select>
+            {% else %}
+                <button type="button" onclick="showquestion()" id="button">Generate question</button>
+                <div id="answer" class="answer" style="border:2px solid black;background-color:lightgray; margin-top:10px">
+                    <div style="background-color:white;"><h1 style="margin-left:600px;">Result for {{topic}}</h1></div>
+                    {% block result %}
+            
+                    {% endblock %}
+                </div>
+            {% endif %}
+        </div>
     </form>
-    <a href="history">View History</a>
-
-    {% block content %}
-
-    {% endblock %}
+    <div id="question" hidden="hidden">
+        {% for ques in questions %}
+            <p>{{ques}}</p>
+        {% endfor %}
+    </div>
 </body>
 {% endblock %}

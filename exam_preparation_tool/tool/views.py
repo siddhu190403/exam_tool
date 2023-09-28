@@ -7,6 +7,10 @@ from django.contrib.auth.models import User,auth
 from django.contrib.auth import logout
 from django.contrib import messages
 from django.template import loader
+from googlesearch import search
+from .summarize import summarize_text,summarize
+from .searchresults import searchresults,recomendvideos,extractlink
+from .scrapecontent import generatequestion
 
 
 # Create your views here.
@@ -25,7 +29,7 @@ def LoginPage(request):
         print(uname)
         print(password)
         a = auth.authenticate(username=uname,password=password)
-        print(a)
+        
         if a is not None:
             auth.login(request,a)
             return redirect('search/')
@@ -41,6 +45,16 @@ def SignupPage(request):
 
 def result(request):
     req = request.POST["search"]
+    marks = int(request.POST["mark"])
+    if marks > 2:
+        marks = marks*2
+    
+    question = generatequestion(req)
+
+    #get links
+    #link = searchresults(req)
+    search_url=""
+
     url = 'https://en.wikipedia.org/wiki/'+req
 
     #add record in history
@@ -54,8 +68,15 @@ def result(request):
     res=""
     for para in soup.find_all("p"):
         res = res+para.get_text()
+    
+    for r in res:
+        if r.isnumeric() or r is '[' or r is ']':\
+            res = res.replace(r,' ')
 
-    return render(request,'result.html',{'result':res})
+    final_result = summarize_text(res,marks)
+    print("final_result : \n"+final_result)
+
+    return render(request,'result.html',{'result':final_result,'questions':question,'topic':req})
 
 def register(request):
     if request.method == 'POST':
@@ -84,3 +105,15 @@ def ViewHistory(request):
             history.append(his.history)
     print(history)
     return render(request,'history.html',{'hist':history})
+
+def GetLinks(request):
+
+    if request.method == 'POST':
+        # Define the search query
+        query = request.POST["query"]
+
+        link = searchresults(query)
+
+        return render(request,'links.html',{'links':link,'query':query,'videos':recomendvideos(query),'video_link':extractlink(recomendvideos(query))})
+    else:
+        return render(request,'links.html')

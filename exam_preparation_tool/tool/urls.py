@@ -10,5 +10,6 @@ urlpatterns = [
     path('sign-up/register',views.register,name='register new user'),
     path('search/logout/',views.Logout,name='logout'),
     path('logout/',views.Logout,name='Logout'),
-    path('search/result/history',views.ViewHistory,name='History')
+    path('history',views.ViewHistory,name='History'),
+    path('link',views.GetLinks,name='Display google links')
  ]

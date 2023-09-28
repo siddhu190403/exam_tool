@@ -4,55 +4,101 @@
     {% bootstrap_css %}
     {% bootstrap_javascript %}
     <link rel="stylesheet" href="{% static 'signup.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      .log{
+        border-style: inset;
+        border-radius: 15px;
+        padding-left : 15px;
+        width:500px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+      }
+      button{
+        width:400px;
+        margin-left:50px;
+        border:2px solid black;
+      }
+      .forms{
+        margin-top:30px;
+      }
+      .img_login{
+        height:300px;
+      }
+      a{
+        color : violet;
+        text-decoration: none;
+      }
+      input{
+        border-color: grey;
+        border-radius:10px;
+      }
+      .background-img{
+        background-image: linear-gradient(aqua);
+      }
+      input{
+        padding: 5px;
+        border-radius: 12px;
+      }
+      .icon {
+        position: absolute;
+        top: 80%;
+        font-size: 24px;
+        transform: translateY(-50%);
+        color: black;
+      }
+      .icon_user{
+        position: absolute;
+        top: 69%;
+        font-size: 24px;
+        transform: translateY(-50%);
+        color: black;
+      }
+      .input-field {
+        padding-left: 40px; /* Adjust this value to control the spacing between the icon and the text */
+        font-size: 20px;
+    }
+    </style>
 </head>
 
-<div class="center">
-    <div class="row">
-        <div class="col">
-            <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item active" data-bs-interval="10000">
-                    <img src="https://www.shutterstock.com/shutterstock/photos/1013125333/display_1500/stock-photo-notebook-with-question-are-you-ready-for-exams-and-alarm-clock-on-table-1013125333.jpg" class="d-block w-100" alt="...">
+<body class="background-img">
+<div class="log">
+  <a href="/" style="color:purple;">Go to Home</a>
+  <a href="/sign-up" style="margin-left:315px; color:green">Sign up</a>
+  <img src="https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg" class="card-img-top img_login" alt="..." style="width:400px;padding-left:45px;">
+        <form class='forms' action="login" method="post">
+            {% csrf_token %}
+              <div class="row">
+                <div class="col">
+                  <hr style="border:2px solid black">
+                  <h2 style="margin-left:180px;">Login</h2>
+                </div>    
+                <div class="row">
+                  <span class="icon_user">&#128274;</span>
+                  <input type = 'text' name="username" id='Username' placeholder="Username" class="input-field"/>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                  <span class="icon">&#128273;</span>
+                  <input type = 'password' name="password" id='password' placeholder="Password" class="input-field"/>
+                </div>
+                <div class="row"  style="margin-top: 10px;">
+                  <div class="col">
+                    <p style="color:orange; margin-left:10px;">Login to continue</p>
                   </div>
-                  <div class="carousel-item" data-bs-interval="2000">
-                    <img src="https://www.shutterstock.com/shutterstock/photos/1013125333/display_1500/stock-photo-notebook-with-question-are-you-ready-for-exams-and-alarm-clock-on-table-1013125333.jp" class="d-block w-100" alt="Not displayed">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="https://www.shutterstock.com/shutterstock/photos/1013125333/display_1500/stock-photo-notebook-with-question-are-you-ready-for-exams-and-alarm-clock-on-table-1013125333.jp" class="d-block w-100" alt="Not displayed">
+                  <div class="col">
+                    <a href="sign-up/" style="margin-left:90px;">New to this site</a>
                   </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-              </div>
-        </div>
-        <div class="col">
-            <h1>Login</h1>
-            <form class='form' action="login" method="post">
-                {% csrf_token %}
-                <div>    
-                    <div>
-                    <label>Username : </label>
-                    <input type = 'text' name="username" id='Username'/>
-                    </div>
-                    <div>
-                    <label>Password : </label>
-                    <input type = 'password' name="password" id='password'/>
-                    </div>
-                    <div>
-                      <button type="submit" class="btn btn-outline-success" >Login</button>
-                    </div>
+                <div class="col">
+                  <button type="submit" class="btn btn-outline-success" style="border-radius:15px;">Login</button>
                 </div>
-            </form>
-        </div>
-    </div>
+            </div>
+        </form>
 </div>
-
+</body>
 
 {% for message in messages %}
    <p>{{message}}</p>

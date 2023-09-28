@@ -23,15 +23,18 @@ def get_stackoverflow_questions(tag, num_questions=10):
         print(f"Error: {e}")
         return []
 
-def generatequestion():
-    tag = input("Enter a programming language or technology tag (e.g., python, java): ")
-    num_questions = int(input("Enter the number of questions to retrieve: "))
+def generatequestion(topic):
+    tag = topic
+    num_questions = 10
 
     questions = get_stackoverflow_questions(tag, num_questions)
+    ques = []
 
     if questions:
         print("\nStack Overflow questions related to the topic:")
         for i, question in enumerate(questions, 1):
-            print(f"{i}. {question}")
+            ques.append(f"{i}. {question}")
     else:
         print("No questions found for the topic.")
+    
+    return ques
